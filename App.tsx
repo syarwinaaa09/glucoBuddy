@@ -25,7 +25,7 @@ const STEPS_GOAL = 10_000;
 
 export default function App() {
 
-  const {steps, flights, distance } = useHealthData(new Date(2023, 5, 13));
+  const {steps, flights, distance } = useHealthData(new Date(2023, 5, 16));
   return (
     <View style={styles.container}> 
       <RingProgress radius ={150} strokeWidth={50} progress={steps / STEPS_GOAL} />
