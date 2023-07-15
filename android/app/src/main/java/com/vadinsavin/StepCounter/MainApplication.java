@@ -1,4 +1,4 @@
-package com.anonymous.glucoBuddy;
+package com.vadinsavin.StepCounter;
 
 import android.app.Application;
 import android.content.res.Configuration;

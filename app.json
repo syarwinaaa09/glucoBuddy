@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "glucoBuddy",
-    "slug": "glucoBuddy",
+    "name": "StepCounter",
+    "slug": "StepCounter",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,18 +11,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vadinsavin.StepCounter"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.glucoBuddy",
+      "package": "com.vadinsavin.StepCounter",
       "permissions": [
         "android.permission.health.READ_STEPS",
         "android.permission.health.READ_FLOORS_CLIMBED",
@@ -36,12 +35,13 @@
       "react-native-health",
       "./androidManifestPlugin.js",
       [
-        "expo-build-properties", {
+        "expo-build-properties",
+        {
           "android": {
             "compileSdkVersion": 33,
             "targetSdkVersion": 33,
             "buildToolsVersion": "33.0.0",
-            "minSdkVersion": 33
+            "minSdkVersion": 26
           }
         }
       ]

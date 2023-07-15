@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.glucoBuddy'
+    namespace 'com.vadinsavin.StepCounter'
     defaultConfig {
-        applicationId 'com.anonymous.glucoBuddy'
+        applicationId 'com.vadinsavin.StepCounter'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
