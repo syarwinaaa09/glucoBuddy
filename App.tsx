@@ -2,10 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Value from './src/components/Value';
 import RingProgress from './src/components/RingProgress';
+import Login from './components/login';
 
 export default function App() {
   return (
     <View style={styles.container}> 
+      <Login/>
       <RingProgress progress={0.56} />
 
       <StatusBar style="auto" />

@@ -9,8 +9,8 @@ export default function login() {
             <Text style={styles.text}>Email:</Text>
             <TextInput style={styles.input}></TextInput>
             <Text style={styles.text}>Password:</Text>
-            <TextInput style={styles.input}></TextInput>
-            <Pressable style={styles.button}>
+            <TextInput style={styles.input} secureTextEntry></TextInput>
+            <Pressable style={styles.button} onPress={onPressHandler}>
               <Text style={styles.buttontext}>
                 Login
               </Text>
@@ -44,3 +44,4 @@ const styles = StyleSheet.create({
     color:'white'
   }
 })
+const onPressHandler = () => {alert("Hello World")}
