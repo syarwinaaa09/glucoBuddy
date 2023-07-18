@@ -2,12 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Value from './src/components/Value';
 import RingProgress from './src/components/RingProgress';
+import { useState } from 'react';
+import useHealthData from './src/hooks/useHealthData';
 
 export default function App() {
   const [date, setDate] = useState(new Date());
   const { steps, flights, distance } = useHealthData(date);
 
-  const changeDate = (numDays) => {
+  const changeDate = (numDays: number) => {
     const currentDate = new Date(date); // Create a copy of the current date
     // Update the date by adding/subtracting the number of days
     currentDate.setDate(currentDate.getDate() + numDays);
