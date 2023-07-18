@@ -1,7 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function login() {
+export default function Login() {
+  const navigation = useNavigation();
+  const onPressHandler = () => {}
     return (
       <View>
         <Text style={styles.title}>Login</Text>
@@ -44,4 +47,3 @@ const styles = StyleSheet.create({
     color:'white'
   }
 })
-const onPressHandler = () => {alert("Hello World")}
