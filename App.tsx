@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import Value from './src/components/Value';
 import RingProgress from './src/components/RingProgress';
 import { useState } from 'react';
 import useHealthData from './src/hooks/useHealthData';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './components/Login';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+function HomeScreen({navigation}: {navigation: any}) {
   const [date, setDate] = useState(new Date());
   const { steps, flights, distance } = useHealthData(date);
 
@@ -18,7 +22,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}> 
+    <View style={styles.container}>
       <RingProgress progress={0.56} />
 
       <View style={styles.values}>
@@ -26,11 +30,20 @@ export default function App() {
         <Value label="Distance" value={`${(distance / 1000).toFixed(2)} km`} />
         <Value label="Flights Climbed" value={flights.toString()} />
       </View>
-
+      <Button title = "Login" onPress={navigation.navigate("Login")} />
       <StatusBar style="auto" />
     </View>
   );
 }
+export default function App() {
+  return (
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+    </Stack.Navigator>
+  </NavigationContainer>
+)}
 
 const styles = StyleSheet.create({
   container: {
