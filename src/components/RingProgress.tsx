@@ -26,54 +26,42 @@ const RingProgress = ({
   const innerRadius = radius - strokeWidth / 2;
   const circumference = 2 * Math.PI * innerRadius;
 
-  const fill = useSharedValue(0);
-
-  useEffect(() => {
-    fill.value = withTiming(progress, { duration: 1500 });
-  }, [progress]);
-
-  const animatedProps = useAnimatedProps(() => ({
-    strokeDasharray: [circumference * fill.value, circumference],
-  }));
-
-  const circleDefaultProps: CircleProps = {
-    r: innerRadius,
-    cx: radius,
-    cy: radius,
-    originX: radius,
-    originY: radius,
-    strokeWidth: strokeWidth,
-    stroke: color,
-    strokeLinecap: 'round',
-    rotation: '-90',
-  };
-
-  return (
-    <View
-      style={{
-        width: radius * 2,
-        height: radius * 2,
-        alignSelf: 'center',
-      }}
-    >
-      <SVG>
-        {/* Background */}
-        <Circle {...circleDefaultProps} opacity={0.2} />
-        {/* Foreground */}
-        <AnimatedCircle animatedProps={animatedProps} {...circleDefaultProps} />
-      </SVG>
-      <AntDesign
-        name="arrowright"
-        size={strokeWidth * 0.8}
-        color="black"
-        style={{
-          position: 'absolute',
-          alignSelf: 'center',
-          top: strokeWidth * 0.1,
-        }}
-      />
-    </View>
-  );
+    return (
+        <View style={{
+            width: radius * 2, 
+            height: radius * 2, 
+            alignSelf: 'center',
+            // backgroundColor: 'green', 
+            }}
+        >
+            <SVG>
+                {/* Background */}
+                <Circle 
+                    cx={radius} 
+                    cy={radius} 
+                    r={innerRadius} 
+                    // fill={'blue'}
+                    strokeWidth={strokeWidth}
+                    stroke={color}
+                    opacity={0.2}
+                />
+                {/* Foreground */}
+                <Circle 
+                    r={innerRadius}
+                    cx={radius} 
+                    cy={radius} 
+                    originX={radius}
+                    originY={radius}
+                    // fill={'blue'}
+                    strokeWidth={strokeWidth}
+                    stroke={color}
+                    strokeDasharray={[circumference * progress, circumference]}
+                    strokeLinecap="round"
+                    rotation="-90"
+                />
+            </SVG>
+        </View>
+    );
 };
 
 export default RingProgress;

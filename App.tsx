@@ -22,8 +22,8 @@ function HomeScreen({navigation}: {navigation: any}) {
   };
 
   return (
-    <View style={styles.container}>
-      <RingProgress progress={0.56} />
+    <View style={styles.container}> 
+      <RingProgress progress={0.9} />
 
       <View style={styles.values}>
         <Value label="Steps" value={steps.toString()} />
