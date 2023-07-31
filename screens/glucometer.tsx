@@ -5,14 +5,15 @@ import { db, ref, onValue } from "../firebase";
 
 import background from "../assets/background1.png";
 
-const Weather = () => {
+const Glucometer = () => {
   const [voltage, setVoltage] = useState(0);
 
   useEffect(() => {
-    const data = ref(db);
+    const data = ref(db, "Sensor");
 
     onValue(data, (snapshot) => {
-      setVoltage(Math.round(snapshot.val().voltage))
+      const voltageValue = snapshot.val().voltage;
+    setVoltage(parseFloat(voltageValue));
     });
   }, [db]);
   return (
@@ -30,7 +31,7 @@ const Weather = () => {
   );
 };
 
-export default Weather;
+export default Glucometer;
 
 const styles = StyleSheet.create({
   container: {
