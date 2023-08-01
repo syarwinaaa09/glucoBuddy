@@ -1,12 +1,29 @@
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react'
 import { Button, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-
+import { firebaseAuth } from "../firebase";
 export default function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const onPressHandler = () => {}
+  const [loading, setLoading] = useState(false);
+  const auth = firebaseAuth;
+  const signIn = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
+      alert("welcome");
+    }
+    catch(error: any) {
+      console.log(error);
+      alert('Sign in failed' + error.message)
+    }
+    finally {
+      setLoading(false);
+    }
+  }
     return (
       <View>
         <Text style={styles.title}>Login</Text>
@@ -14,15 +31,15 @@ export default function Login() {
             <Text style={styles.text}>Email:</Text>
             <TextInput 
             style={styles.input}
-            value={username}
-            onChangeText={setUsername}></TextInput>
+            value={email}
+            onChangeText={setEmail}></TextInput>
             <Text style={styles.text}>Password:</Text>
             <TextInput 
             style={styles.input} 
             value={password}
             onChangeText={setPassword}
             secureTextEntry></TextInput>
-            <Pressable style={styles.button} onPress={onPressHandler}>
+            <Pressable style={styles.button} onPress={signIn}>
               <Text style={styles.buttontext}>
                 Login
               </Text>
