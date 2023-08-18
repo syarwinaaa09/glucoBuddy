@@ -25,7 +25,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           {user ? (
-            <Stack.Screen name="Glucometer" component={Glucometer} />
+            <Stack.Screen 
+            name="Glucometer" 
+            component={Glucometer} 
+            options={{ headerShown: false }}/>
           ) : (
             <Stack.Screen
               name="Login"
@@ -35,7 +38,6 @@ export default function App() {
           )}
         </Stack.Navigator>
       </NavigationContainer>
-      <Glucometer />
       <StatusBar style="auto" />
     </View>
   );
