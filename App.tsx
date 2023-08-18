@@ -35,7 +35,6 @@ export default function App() {
           )}
         </Stack.Navigator>
       </NavigationContainer>
-      <Glucometer />
       <StatusBar style="auto" />
     </View>
   );
