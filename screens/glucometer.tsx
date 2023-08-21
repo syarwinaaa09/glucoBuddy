@@ -4,7 +4,7 @@ import { db, ref, onValue } from "../firebase";
 import background from "../assets/background1.png";
 
 const Glucometer = () => {
-  const [voltage, setVoltage] = useState(0);
+  const [voltage, setResult] = useState(0);  
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -12,16 +12,19 @@ const Glucometer = () => {
 
     onValue(data, (snapshot) => {
       const voltageValue = snapshot.val().voltage;
-      setVoltage(parseFloat(voltageValue));
 
-      // Determine the message based on the voltage value
-      if (voltageValue < 0.04) {
-        setMessage("The sensor sot liao");
-      } else if (voltageValue < 0.8) {
-        setMessage("Please uncover the sensor");
-      } else if (voltageValue < 2) {
-        setMessage("Possible diabetic");
-      } else if (voltageValue < 3.2) {
+      // Evaluate the quadratic equation
+      const newResult = (-0.0449 * Math.pow(voltageValue, 2) - 3.439 * voltageValue + 14.419).toFixed(2);
+      setResult(newResult);
+
+      // Determine the message based on the quadratic equation result
+      if (newResult > 14.25) {
+        setMessage("The sensor is broken");
+      } else if (newResult > 7) {
+        setMessage("Diabetic");
+      } else if (newResult > 5.6) {
+        setMessage("Pre-Diabetic");
+      } else if (newResult > 3.9) {
         setMessage("Normal");
       } else {
         setMessage("Please put finger on the sensor");
@@ -35,8 +38,8 @@ const Glucometer = () => {
         <View style={styles.spacer}></View>
         <View style={styles.dataWrapper}>
           <View style={styles.voltage}>
-            <Text style={styles.dataText}>{voltage}</Text>
-            <Text style={styles.title}>Voltage</Text>
+            <Text style={styles.dataText}>{voltage}</Text> 
+            <Text style={styles.title}>mmol/L</Text>
           </View>
         </View>
         <Text style={styles.messageText}>{message}</Text>
