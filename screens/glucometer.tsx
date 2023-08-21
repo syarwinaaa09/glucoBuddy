@@ -1,21 +1,34 @@
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import { useEffect, useState } from "react";
-
 import { db, ref, onValue } from "../firebase";
-
 import background from "../assets/background1.png";
 
 const Glucometer = () => {
   const [voltage, setVoltage] = useState(0);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const data = ref(db, "Sensor");
 
     onValue(data, (snapshot) => {
       const voltageValue = snapshot.val().voltage;
-    setVoltage(parseFloat(voltageValue));
+      setVoltage(parseFloat(voltageValue));
+
+      // Determine the message based on the voltage value
+      if (voltageValue < 0.04) {
+        setMessage("The sensor sot liao");
+      } else if (voltageValue < 0.8) {
+        setMessage("Please uncover the sensor");
+      } else if (voltageValue < 2) {
+        setMessage("Possible diabetic");
+      } else if (voltageValue < 3.2) {
+        setMessage("Normal");
+      } else {
+        setMessage("Please put finger on the sensor");
+      }
     });
   }, [db]);
+
   return (
     <ImageBackground source={background} style={styles.container}>
       <View style={styles.data}>
@@ -26,6 +39,7 @@ const Glucometer = () => {
             <Text style={styles.title}>Voltage</Text>
           </View>
         </View>
+        <Text style={styles.messageText}>{message}</Text>
       </View>
     </ImageBackground>
   );
@@ -72,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dataText: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: "200",
     color: "white",
     textAlign: "center",
@@ -82,6 +96,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
     color: "white",
+    textAlign: "center",
+    fontFamily: "Helvetica",
+  },
+  messageText: {
+    fontSize: 25,
+    color: "white",
+    marginTop: 20,
     textAlign: "center",
     fontFamily: "Helvetica",
   },
