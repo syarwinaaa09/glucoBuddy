@@ -15,13 +15,13 @@ const Glucometer = () => {
       setVoltage(parseFloat(voltageValue));
 
       // Determine the message based on the voltage value
-      if (voltageValue < 40) {
-        setMessage("Normal");
-      } else if (voltageValue < 800) {
+      if (voltageValue < 0.04) {
+        setMessage("The sensor sot liao");
+      } else if (voltageValue < 0.8) {
         setMessage("Please uncover the sensor");
-      } else if (voltageValue < 2000) {
+      } else if (voltageValue < 2) {
         setMessage("Possible diabetic");
-      } else if (voltageValue < 3200) {
+      } else if (voltageValue < 3.2) {
         setMessage("Normal");
       } else {
         setMessage("Please put finger on the sensor");
